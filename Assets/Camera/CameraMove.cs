@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour, ICameraMove
 {
-    [Header(" Camera Move Control")]
+    [Header("Camera Move Control")]
     [SerializeField] float _smoothSpeed;
     [SerializeField] float _timeToCameraStatic;
-    [Header(" Camera Height Borders")]
+    [Header("Camera Height Borders")]
     [SerializeField] float _maxHeight;
     [SerializeField] float _minHeight;
     [SerializeField] LayerMask _groundLayer;
-    [Header(" Camera Map Borders")]
+    [Header("Camera Map Borders")]
     [SerializeField] float _westBorder;
     [SerializeField] float _eastBorder;
     [SerializeField] float _northBorder;
