@@ -6,12 +6,21 @@
             "id": "08c555dc-a94f-473b-94ee-a7ab368e0f7c",
             "actions": [
                 {
-                    "name": "PrimaryTouchContact",
+                    "name": "FirstTouchContact",
                     "type": "Button",
                     "id": "b02d349e-f214-4b35-9e37-e2ebc10a71a2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FirstTouchPosition",
+                    "type": "PassThrough",
+                    "id": "a0e84128-342d-4255-a62f-ca1272030de4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -24,21 +33,12 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DoubleTouchContact",
+                    "name": "SecondTouchContact",
                     "type": "Button",
                     "id": "bb86858b-844f-4215-9b66-39920f68244d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "PrimaryTouchPosition",
-                    "type": "PassThrough",
-                    "id": "a0e84128-342d-4255-a62f-ca1272030de4",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -70,7 +70,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DoubleTouchContact",
+                    "action": "SecondTouchContact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -81,7 +81,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PrimaryTouchPosition",
+                    "action": "FirstTouchPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -103,7 +103,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PrimaryTouchContact",
+                    "action": "FirstTouchContact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

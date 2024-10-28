@@ -28,12 +28,21 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             ""id"": ""08c555dc-a94f-473b-94ee-a7ab368e0f7c"",
             ""actions"": [
                 {
-                    ""name"": ""PrimaryTouchContact"",
+                    ""name"": ""FirstTouchContact"",
                     ""type"": ""Button"",
                     ""id"": ""b02d349e-f214-4b35-9e37-e2ebc10a71a2"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FirstTouchPosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""a0e84128-342d-4255-a62f-ca1272030de4"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -46,21 +55,12 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DoubleTouchContact"",
+                    ""name"": ""SecondTouchContact"",
                     ""type"": ""Button"",
                     ""id"": ""bb86858b-844f-4215-9b66-39920f68244d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""PrimaryTouchPosition"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""a0e84128-342d-4255-a62f-ca1272030de4"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -92,7 +92,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DoubleTouchContact"",
+                    ""action"": ""SecondTouchContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -103,7 +103,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PrimaryTouchPosition"",
+                    ""action"": ""FirstTouchPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -125,7 +125,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PrimaryTouchContact"",
+                    ""action"": ""FirstTouchContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -136,10 +136,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
 }");
         // GameplayInput
         m_GameplayInput = asset.FindActionMap("GameplayInput", throwIfNotFound: true);
-        m_GameplayInput_PrimaryTouchContact = m_GameplayInput.FindAction("PrimaryTouchContact", throwIfNotFound: true);
+        m_GameplayInput_FirstTouchContact = m_GameplayInput.FindAction("FirstTouchContact", throwIfNotFound: true);
+        m_GameplayInput_FirstTouchPosition = m_GameplayInput.FindAction("FirstTouchPosition", throwIfNotFound: true);
         m_GameplayInput_SingleSwipeOnScreen = m_GameplayInput.FindAction("SingleSwipeOnScreen", throwIfNotFound: true);
-        m_GameplayInput_DoubleTouchContact = m_GameplayInput.FindAction("DoubleTouchContact", throwIfNotFound: true);
-        m_GameplayInput_PrimaryTouchPosition = m_GameplayInput.FindAction("PrimaryTouchPosition", throwIfNotFound: true);
+        m_GameplayInput_SecondTouchContact = m_GameplayInput.FindAction("SecondTouchContact", throwIfNotFound: true);
         m_GameplayInput_SecondTouchPosition = m_GameplayInput.FindAction("SecondTouchPosition", throwIfNotFound: true);
     }
 
@@ -207,19 +207,19 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     // GameplayInput
     private readonly InputActionMap m_GameplayInput;
     private List<IGameplayInputActions> m_GameplayInputActionsCallbackInterfaces = new List<IGameplayInputActions>();
-    private readonly InputAction m_GameplayInput_PrimaryTouchContact;
+    private readonly InputAction m_GameplayInput_FirstTouchContact;
+    private readonly InputAction m_GameplayInput_FirstTouchPosition;
     private readonly InputAction m_GameplayInput_SingleSwipeOnScreen;
-    private readonly InputAction m_GameplayInput_DoubleTouchContact;
-    private readonly InputAction m_GameplayInput_PrimaryTouchPosition;
+    private readonly InputAction m_GameplayInput_SecondTouchContact;
     private readonly InputAction m_GameplayInput_SecondTouchPosition;
     public struct GameplayInputActions
     {
         private @InputMap m_Wrapper;
         public GameplayInputActions(@InputMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PrimaryTouchContact => m_Wrapper.m_GameplayInput_PrimaryTouchContact;
+        public InputAction @FirstTouchContact => m_Wrapper.m_GameplayInput_FirstTouchContact;
+        public InputAction @FirstTouchPosition => m_Wrapper.m_GameplayInput_FirstTouchPosition;
         public InputAction @SingleSwipeOnScreen => m_Wrapper.m_GameplayInput_SingleSwipeOnScreen;
-        public InputAction @DoubleTouchContact => m_Wrapper.m_GameplayInput_DoubleTouchContact;
-        public InputAction @PrimaryTouchPosition => m_Wrapper.m_GameplayInput_PrimaryTouchPosition;
+        public InputAction @SecondTouchContact => m_Wrapper.m_GameplayInput_SecondTouchContact;
         public InputAction @SecondTouchPosition => m_Wrapper.m_GameplayInput_SecondTouchPosition;
         public InputActionMap Get() { return m_Wrapper.m_GameplayInput; }
         public void Enable() { Get().Enable(); }
@@ -230,18 +230,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayInputActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayInputActionsCallbackInterfaces.Add(instance);
-            @PrimaryTouchContact.started += instance.OnPrimaryTouchContact;
-            @PrimaryTouchContact.performed += instance.OnPrimaryTouchContact;
-            @PrimaryTouchContact.canceled += instance.OnPrimaryTouchContact;
+            @FirstTouchContact.started += instance.OnFirstTouchContact;
+            @FirstTouchContact.performed += instance.OnFirstTouchContact;
+            @FirstTouchContact.canceled += instance.OnFirstTouchContact;
+            @FirstTouchPosition.started += instance.OnFirstTouchPosition;
+            @FirstTouchPosition.performed += instance.OnFirstTouchPosition;
+            @FirstTouchPosition.canceled += instance.OnFirstTouchPosition;
             @SingleSwipeOnScreen.started += instance.OnSingleSwipeOnScreen;
             @SingleSwipeOnScreen.performed += instance.OnSingleSwipeOnScreen;
             @SingleSwipeOnScreen.canceled += instance.OnSingleSwipeOnScreen;
-            @DoubleTouchContact.started += instance.OnDoubleTouchContact;
-            @DoubleTouchContact.performed += instance.OnDoubleTouchContact;
-            @DoubleTouchContact.canceled += instance.OnDoubleTouchContact;
-            @PrimaryTouchPosition.started += instance.OnPrimaryTouchPosition;
-            @PrimaryTouchPosition.performed += instance.OnPrimaryTouchPosition;
-            @PrimaryTouchPosition.canceled += instance.OnPrimaryTouchPosition;
+            @SecondTouchContact.started += instance.OnSecondTouchContact;
+            @SecondTouchContact.performed += instance.OnSecondTouchContact;
+            @SecondTouchContact.canceled += instance.OnSecondTouchContact;
             @SecondTouchPosition.started += instance.OnSecondTouchPosition;
             @SecondTouchPosition.performed += instance.OnSecondTouchPosition;
             @SecondTouchPosition.canceled += instance.OnSecondTouchPosition;
@@ -249,18 +249,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IGameplayInputActions instance)
         {
-            @PrimaryTouchContact.started -= instance.OnPrimaryTouchContact;
-            @PrimaryTouchContact.performed -= instance.OnPrimaryTouchContact;
-            @PrimaryTouchContact.canceled -= instance.OnPrimaryTouchContact;
+            @FirstTouchContact.started -= instance.OnFirstTouchContact;
+            @FirstTouchContact.performed -= instance.OnFirstTouchContact;
+            @FirstTouchContact.canceled -= instance.OnFirstTouchContact;
+            @FirstTouchPosition.started -= instance.OnFirstTouchPosition;
+            @FirstTouchPosition.performed -= instance.OnFirstTouchPosition;
+            @FirstTouchPosition.canceled -= instance.OnFirstTouchPosition;
             @SingleSwipeOnScreen.started -= instance.OnSingleSwipeOnScreen;
             @SingleSwipeOnScreen.performed -= instance.OnSingleSwipeOnScreen;
             @SingleSwipeOnScreen.canceled -= instance.OnSingleSwipeOnScreen;
-            @DoubleTouchContact.started -= instance.OnDoubleTouchContact;
-            @DoubleTouchContact.performed -= instance.OnDoubleTouchContact;
-            @DoubleTouchContact.canceled -= instance.OnDoubleTouchContact;
-            @PrimaryTouchPosition.started -= instance.OnPrimaryTouchPosition;
-            @PrimaryTouchPosition.performed -= instance.OnPrimaryTouchPosition;
-            @PrimaryTouchPosition.canceled -= instance.OnPrimaryTouchPosition;
+            @SecondTouchContact.started -= instance.OnSecondTouchContact;
+            @SecondTouchContact.performed -= instance.OnSecondTouchContact;
+            @SecondTouchContact.canceled -= instance.OnSecondTouchContact;
             @SecondTouchPosition.started -= instance.OnSecondTouchPosition;
             @SecondTouchPosition.performed -= instance.OnSecondTouchPosition;
             @SecondTouchPosition.canceled -= instance.OnSecondTouchPosition;
@@ -283,10 +283,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     public GameplayInputActions @GameplayInput => new GameplayInputActions(this);
     public interface IGameplayInputActions
     {
-        void OnPrimaryTouchContact(InputAction.CallbackContext context);
+        void OnFirstTouchContact(InputAction.CallbackContext context);
+        void OnFirstTouchPosition(InputAction.CallbackContext context);
         void OnSingleSwipeOnScreen(InputAction.CallbackContext context);
-        void OnDoubleTouchContact(InputAction.CallbackContext context);
-        void OnPrimaryTouchPosition(InputAction.CallbackContext context);
+        void OnSecondTouchContact(InputAction.CallbackContext context);
         void OnSecondTouchPosition(InputAction.CallbackContext context);
     }
 }
