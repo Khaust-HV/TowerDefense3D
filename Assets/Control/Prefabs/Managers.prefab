@@ -76,5 +76,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8418073839e48e8ae2b95715ba5e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensitivityMove: 3
-  _sensitivityZoom: 150
