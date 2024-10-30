@@ -16,9 +16,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 1, g: 1, b: 1, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.003
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -212,10 +212,55 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1798619867241433798, guid: e3307a58575944dc594031665931bd5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3459288329852460472, guid: e3307a58575944dc594031665931bd5d,
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168295771106641213, guid: e3307a58575944dc594031665931bd5d,
+        type: 3}
+      propertyPath: m_EnableTreeColliders
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924688227008216987, guid: e3307a58575944dc594031665931bd5d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.86791855
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924688227008216987, guid: e3307a58575944dc594031665931bd5d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.39214194
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924688227008216987, guid: e3307a58575944dc594031665931bd5d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.25606626
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924688227008216987, guid: e3307a58575944dc594031665931bd5d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.16544527
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924688227008216987, guid: e3307a58575944dc594031665931bd5d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 36.581
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924688227008216987, guid: e3307a58575944dc594031665931bd5d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 45.653
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924688227008216987, guid: e3307a58575944dc594031665931bd5d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 37.426
       objectReference: {fileID: 0}
     - target: {fileID: 7953990940549158301, guid: e3307a58575944dc594031665931bd5d,
         type: 3}
@@ -288,17 +333,17 @@ PrefabInstance:
     - target: {fileID: 1540062685830143208, guid: 1cd0adc1c6d2c496bab05ebd9ff81b5e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 83
+      value: 43.3
       objectReference: {fileID: 0}
     - target: {fileID: 1540062685830143208, guid: 1cd0adc1c6d2c496bab05ebd9ff81b5e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 67
+      value: 84.5
       objectReference: {fileID: 0}
     - target: {fileID: 1540062685830143208, guid: 1cd0adc1c6d2c496bab05ebd9ff81b5e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -70
+      value: -60.8
       objectReference: {fileID: 0}
     - target: {fileID: 1540062685830143208, guid: 1cd0adc1c6d2c496bab05ebd9ff81b5e,
         type: 3}
@@ -343,7 +388,7 @@ PrefabInstance:
     - target: {fileID: 3465094238427102603, guid: 1cd0adc1c6d2c496bab05ebd9ff81b5e,
         type: 3}
       propertyPath: _maxHeight
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3465094238427102603, guid: 1cd0adc1c6d2c496bab05ebd9ff81b5e,
         type: 3}
@@ -373,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 3465094238427102603, guid: 1cd0adc1c6d2c496bab05ebd9ff81b5e,
         type: 3}
       propertyPath: _southBorder
-      value: -350
+      value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 3465094238427102603, guid: 1cd0adc1c6d2c496bab05ebd9ff81b5e,
         type: 3}
@@ -389,6 +434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _groundLayer.m_Bits
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6234340480555759298, guid: 1cd0adc1c6d2c496bab05ebd9ff81b5e,
+        type: 3}
+      propertyPath: far clip plane
+      value: 750
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

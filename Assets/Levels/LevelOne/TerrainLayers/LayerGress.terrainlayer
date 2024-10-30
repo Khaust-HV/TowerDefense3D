@@ -7,14 +7,14 @@ TerrainLayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LayerGress
-  m_DiffuseTexture: {fileID: 2800000, guid: 70ba06019ecd44b61b6101d518088ab2, type: 3}
+  m_DiffuseTexture: {fileID: 2800000, guid: 9d3a5d158469e4788a21b4ee752cd294, type: 3}
   m_NormalMapTexture: {fileID: 0}
   m_MaskMapTexture: {fileID: 0}
-  m_TileSize: {x: 10, y: 10}
+  m_TileSize: {x: 100, y: 100}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
-  m_Metallic: 0
-  m_Smoothness: 0
+  m_Metallic: 0.294
+  m_Smoothness: 0.178
   m_NormalScale: 1
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
   m_DiffuseRemapMax: {x: 1, y: 1, z: 1, w: 1}
