@@ -5,6 +5,8 @@ public class CameraMove : MonoBehaviour, ICameraMove
     [Header("Camera Move Control")]
     [SerializeField] float _smoothSpeed;
     [SerializeField] float _timeToCameraStatic;
+    [SerializeField] private float _sensitivityMove;
+    [SerializeField] private float _sensitivityZoom;
     [Header("Camera Height Borders")]
     [SerializeField] float _maxHeight;
     [SerializeField] float _minHeight;
@@ -19,7 +21,8 @@ public class CameraMove : MonoBehaviour, ICameraMove
     private CameraAction _cameraAction;
     private bool _isCameraStatic;
     private float _timeCameraStatic;
-    private float _cameraHeight;
+    private float _correntHeight;
+    private float _correntSensitivityMove;
 
     private Vector3 _newMovePosition;
     private Vector3 _newZoomPosition;
@@ -30,7 +33,10 @@ public class CameraMove : MonoBehaviour, ICameraMove
         _newMovePosition = _trCamera.position;
         _newZoomPosition = _trCamera.position;
 
-        _cameraHeight = _trCamera.position.y;
+        _correntHeight = _maxHeight;
+        _correntSensitivityMove = _sensitivityMove;
+
+        _trCamera.position = CheckHeight(_trCamera.position);
     }
 
     private void Update() {
@@ -64,17 +70,25 @@ public class CameraMove : MonoBehaviour, ICameraMove
     }
 
     private void ZoomCamera() {
-        _cameraHeight = Mathf.Clamp (
-            Mathf.Lerp(_cameraHeight, _cameraHeight + _newZoomPosition.y - _trCamera.position.y, _smoothSpeed), 
+        _correntHeight = Mathf.Clamp (
+            Mathf.Lerp(_correntHeight, _correntHeight + _newZoomPosition.y - _trCamera.position.y, _smoothSpeed), 
             _minHeight, 
             _maxHeight
         );
+
+        SetSensitivityMoveFromHeight();
 
         Vector3 hightPosition = CheckHeight(Vector3.Lerp(_trCamera.position, _newZoomPosition, _smoothSpeed));
         
         Vector3 newPosition = CheckMapBorder(hightPosition);
 
         _trCamera.position = newPosition;
+    }
+
+    private void SetSensitivityMoveFromHeight() {
+        float percentageOfMaxHeight = _correntHeight * 100 / _maxHeight;
+
+        _correntSensitivityMove = _sensitivityMove * percentageOfMaxHeight / 100;
     }
 
     private Vector3 CheckMapBorder(Vector3 cameraPosition) {
@@ -88,7 +102,7 @@ public class CameraMove : MonoBehaviour, ICameraMove
         if (Physics.Raycast(cameraPosition, Vector3.down, out RaycastHit hit, 100f, _groundLayer)) {
             return new Vector3 (
                 cameraPosition.x, 
-                cameraPosition.y + _cameraHeight - hit.distance, 
+                cameraPosition.y + _correntHeight - hit.distance, 
                 cameraPosition.z
             );
         }
@@ -100,14 +114,14 @@ public class CameraMove : MonoBehaviour, ICameraMove
     }
 
     public void SetNewMovePosition(Vector3 vec3) {
-        _newMovePosition += vec3;
+        _newMovePosition += vec3 * _correntSensitivityMove * Time.deltaTime;
     }
 
     public void SetNewZoomPosition(Vector3 vec3) {
-        if (vec3.y > 0f && _cameraHeight != _maxHeight) {
-            _newZoomPosition += vec3;
+        if (vec3.y > 0f && _correntHeight != _maxHeight) {
+            _newZoomPosition += vec3 * _sensitivityZoom * Time.deltaTime;
         }
-        else if (vec3.y < 0f && _cameraHeight != _minHeight){
+        else if (vec3.y < 0f && _correntHeight != _minHeight){
             _newZoomPosition += vec3;
         }
     }

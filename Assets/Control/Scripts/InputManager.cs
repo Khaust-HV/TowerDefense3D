@@ -3,10 +3,6 @@ using InputSystemActions;
 
 public sealed class InputManager : MonoBehaviour
 {
-    [Header("Camera Control")]
-    [SerializeField] private float _sensitivityMove;
-    [SerializeField] private float _sensitivityZoom;
-
     private TouchscreenInputActions _touchscreenInputActions;
     private ICameraMove _icameraMove;
     private CameraAction _cameraAction;
@@ -58,8 +54,6 @@ public sealed class InputManager : MonoBehaviour
         }
 
         private void CameraMove(Vector2 vec2) {
-            vec2 = vec2 * _sensitivityMove * Time.deltaTime;
-
             Vector3 position =  new Vector3(vec2.x, 0f, vec2.y);
 
             _icameraMove.SetNewMovePosition(position);
@@ -76,10 +70,10 @@ public sealed class InputManager : MonoBehaviour
             Vector3 position;
 
             if (correntTouchDistance > _oldDistanceTouchPosition) {
-                position = new Vector3(0f, -1f, 1f) * _sensitivityZoom * Time.deltaTime;
+                position = new Vector3(0f, -1f, 1f);
             }
             else {
-                position = new Vector3(0f, 1f, -1f) * _sensitivityZoom * Time.deltaTime;
+                position = new Vector3(0f, 1f, -1f);
             }
 
             _icameraMove.SetNewZoomPosition(position);
