@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraMove : MonoBehaviour, ICameraMove
+public class CameraMove : MonoBehaviour, ICameraControl
 {
     [Header("Camera Move Control")]
     [SerializeField] float _smoothSpeed;
@@ -167,7 +167,7 @@ public enum CameraAction {
     CameraLooked
 }
 
-public interface ICameraMove {
+public interface ICameraControl {
     public void SwitchCameraAction(CameraAction cameraAction);
     public void SetNewMovePosition(Vector3 vec3);
     public void SetNewZoomPosition(Vector3 vec3);
